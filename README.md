@@ -1,57 +1,102 @@
 # Parameter Optimization of SVM
 
-## Project Overview
+This project predicts room occupancy based on sensor data using a Support Vector Machine (SVM). The dataset contains features such as light, temperature, humidity, and CO2 levels, which help estimate the number of people in a room.
 
-This project involves optimizing a Support Vector Machine (SVM) model on a multi-class dataset from the UCI Library, focusing on achieving the best accuracy by fine-tuning parameters. The dataset was split into 70% for training and 30% for testing across 10 different samples. For each sample, SVM was optimized over 100 iterations to determine the best parameters.
+---
 
-## Objectives
+## **Table of Contents**
+1. [Introduction](#introduction)
+2. [Dataset](#dataset)
+3. [Model](#model)
+4. [Results](#results)
+5. [Visualization](#visualization)
+6. [How to Run](#how-to-run)
 
-1. **Dataset**: Use a multi-class dataset with 5k-30k rows from the UCI library.
-2. **Training-Testing Split**: Divide dataset into 70% training and 30% testing.
-3. **Optimization**: Optimize SVM for each sample with 100 iterations.
-4. **Results Table**: Record best accuracy and parameters (Kernel, Nu, Epsilon) for each sample.
-5. **Convergence Graph**: Plot accuracy vs. iterations for the sample with the highest accuracy.
+---
 
-## Results
+## **Introduction**
 
-| Sample # | Best Accuracy | Best SVM Parameters (Kernel, Nu, Epsilon) |
-|----------|---------------|-------------------------------------------|
-| S1       |               |                                           |
-| S2       |               |                                           |
-| S3       |               |                                           |
-| S4       |               |                                           |
-| S5       |               |                                           |
-| S6       |               |                                           |
-| S7       |               |                                           |
-| S8       |               |                                           |
-| S9       |               |                                           |
-| S10      |               |                                           |
+Room occupancy estimation is crucial for energy-efficient building management systems. In this project:
+- The data is processed and visualized using Python libraries.
+- Multiple SVM kernels (linear, poly, rbf, sigmoid) are evaluated for their performance.
+- Learning curves are plotted to demonstrate the model's training and cross-validation performance.
 
-*Complete results can be found in the `results/` directory.*
+---
 
-## Convergence Graph
+## **Dataset**
 
-Below is the convergence graph showing accuracy over iterations for the sample with the highest accuracy:
+The dataset used for this project is `Room_Occupancy_Data.csv`. It includes:
+- Sensor readings (e.g., temperature, humidity, light, CO2).
+- Target variable: Room Occupancy Count (number of people in the room).
 
-*(Insert convergence graph image here)*
+The dataset undergoes preprocessing, including:
+- Removal of unnecessary columns (e.g., date, time).
+- Standardization of features using `StandardScaler`.
 
-## Installation
+---
 
-1. Clone the repository:
+## **Model**
+
+The Support Vector Machine (SVM) is used as the classification model. The script performs:
+1. **Hyperparameter tuning**: Evaluates different values of `C`, `gamma`, and kernels.
+2. **Learning Curve Analysis**: Assesses model performance as training size increases.
+
+### **Optimization Process**
+- 10 samples of train-test splits.
+- Best kernel, `C`, and `gamma` parameters are identified based on accuracy.
+
+---
+
+## **Results**
+
+### **Best Kernel and Parameters**
+- Best Kernel: Linear
+- Best Accuracy: 1.0
+- Optimal Parameters:
+  - Nu (C): 1.19
+  - Epsilon (Gamma): 4.05
+
+### **Performance Table**
+
+| Sample | Best Accuracy | Best Kernel | Best Nu (C) | Best Epsilon (Gamma) |
+|--------|---------------|-------------|-------------|-----------------------|
+| 1      | 0.99          | linear      | 8.28        | 2.83                 |
+| 2      | 0.99          | linear      | 0.61        | 6.43                 |
+| 3      | 1.0           | linear      | 1.19        | 4.05                 |
+| 4      | 0.99          | poly        | 6.94        | 4.37                 |
+| 5      | 0.99          | poly        | 5.94        | 8.56                 |
+| 6      | 1.0           | linear      | 0.74        | 3.55                 |
+| 7      | 0.99          | linear      | 1.2         | 6.87                 |
+| 8      | 0.99          | linear      | 7.75        | 2.21                 |
+| 9      | 0.99          | poly        | 3.65        | 6.32                 |
+| 10     | 0.99          | linear      | 8.55        | 9.98                 |
+
+---
+
+## **Visualization**
+
+### **Learning Curve**
+Below is the plot showing the training and validation accuracy for different training sizes:
+
+![Learning Curve](./learningcurve.png) 
+
+---
+
+## **How to Run**
+
+1. Clone this repository:
    ```bash
    git clone https://github.com/sidharthd7/Parameter-Optimization-SVM.git
-   cd parameter-optimization-svm
+   cd Parameter-Optimization-SVM
    ```
 
-2. Install dependencies:
+2. Install the required packages:
    ```bash
    pip install -r requirements.txt
    ```
 
-## Usage
+3. Add your dataset (`Room_Occupancy_Data.csv`) to the project folder.
 
-1. Run the optimization script for all samples:
-   ```bash
-   python optimize_svm.py
-   ```
-2. View results in the `results/` directory.
+4. Run the Jupyter Notebook
+
+---
